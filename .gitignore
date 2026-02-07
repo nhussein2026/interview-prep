@@ -11,3 +11,9 @@ Thumbs.db
 # Personal notes (if any)
 personal/
 private/
+
+# Node modules (if using any build tools)
+node_modules/
+
+# Docsify cache
+.cache/

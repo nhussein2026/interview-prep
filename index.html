@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Interview Prep Hub | Ace Your Tech Interview</title>
+    <meta name="description"
+        content="Open-source interview preparation notes for software engineers. Data structures, algorithms, system design, and more.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d1117">
+
+    <!-- Favicon -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+
+    <!-- Docsify Dark Theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.min.css">
+
+    <!-- Code Highlighting - Atom One Dark -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.min.css">
+
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            /* Terminal/Hacker vibes */
+            --base-background-color: #0d1117;
+            --base-color: #c9d1d9;
+            --theme-color: #58a6ff;
+            --heading-color: #58a6ff;
+            --link-color: #58a6ff;
+            --link-color--hover: #79c0ff;
+            --sidebar-background: #0d1117;
+            --sidebar-nav-link-color: #8b949e;
+            --sidebar-nav-link-color--active: #58a6ff;
+            --sidebar-nav-link-border-color--active: #58a6ff;
+            --cover-background-color: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+            --code-theme-background: #161b22;
+            --code-theme-text: #c9d1d9;
+            --notice-tip-border-color: #238636;
+            --notice-important-border-color: #58a6ff;
+            --blockquote-border-color: #30363d;
+            --table-cell-border-color: #30363d;
+            --mono-font: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
+        }
+
+        /* Import coding font */
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        /* Code styling */
+        code,
+        pre {
+            font-family: var(--mono-font) !important;
+        }
+
+        /* Terminal-style code blocks */
+        pre {
+            border-radius: 8px !important;
+            border: 1px solid #30363d !important;
+        }
+
+        /* Inline code styling */
+        code:not([class*="lang-"]) {
+            background: #21262d !important;
+            color: #79c0ff !important;
+            border-radius: 4px !important;
+            padding: 2px 6px !important;
+            font-size: 0.9em !important;
+        }
+
+        /* Table styling */
+        table {
+            border-collapse: collapse !important;
+            border-radius: 8px !important;
+            overflow: hidden !important;
+        }
+
+        th {
+            background: #21262d !important;
+            color: #58a6ff !important;
+            font-weight: 600 !important;
+        }
+
+        tr:hover {
+            background: rgba(88, 166, 255, 0.05) !important;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            border-right: 1px solid #30363d !important;
+        }
+
+        .sidebar-nav li a {
+            transition: all 0.2s ease !important;
+        }
+
+        .sidebar-nav li a:hover {
+            color: #58a6ff !important;
+            padding-left: 5px !important;
+        }
+
+        /* Search box */
+        .search input {
+            background: #21262d !important;
+            border: 1px solid #30363d !important;
+            border-radius: 8px !important;
+            color: #c9d1d9 !important;
+        }
+
+        .search input:focus {
+            border-color: #58a6ff !important;
+            box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.2) !important;
+        }
+
+        /* Links with subtle animation */
+        a {
+            transition: all 0.2s ease !important;
+        }
+
+        /* Headings */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-weight: 600 !important;
+        }
+
+        h1 {
+            border-bottom: 1px solid #30363d !important;
+            padding-bottom: 0.5em !important;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0d1117;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #30363d;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #484f58;
+        }
+
+        /* Cover page */
+        .cover {
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%) !important;
+        }
+
+        .cover h1 {
+            color: #58a6ff !important;
+            font-weight: 700 !important;
+        }
+
+        .cover blockquote {
+            color: #8b949e !important;
+        }
+
+        .cover .cover-main>a:last-child {
+            background: #238636 !important;
+            border: none !important;
+            border-radius: 8px !important;
+            padding: 12px 24px !important;
+            font-weight: 600 !important;
+        }
+
+        .cover .cover-main>a:last-child:hover {
+            background: #2ea043 !important;
+            transform: translateY(-2px);
+        }
+
+        /* Progress bar */
+        .progress {
+            background: #58a6ff !important;
+        }
+
+        /* Copy code button */
+        .docsify-copy-code-button {
+            background: #21262d !important;
+            color: #8b949e !important;
+            border-radius: 4px !important;
+        }
+
+        .docsify-copy-code-button:hover {
+            background: #30363d !important;
+            color: #c9d1d9 !important;
+        }
+
+        /* Alerts/Notices */
+        blockquote {
+            border-left: 4px solid #30363d !important;
+            background: #161b22 !important;
+            border-radius: 0 8px 8px 0 !important;
+            padding: 1em !important;
+        }
+
+        /* Emoji styling */
+        .emoji {
+            font-size: 1.2em !important;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                background: #0d1117 !important;
+            }
+        }
+
+        /* Typing cursor animation for cover */
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .cover h1::after {
+            content: '_';
+            animation: blink 1s infinite;
+            color: #238636;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">Loading...</div>
+
+    <script>
+        window.$docsify = {
+            name: '💻 Interview Prep Hub',
+            repo: 'https://github.com/nhussein2026/interview-prep',
+            loadSidebar: true,
+            subMaxLevel: 3,
+            auto2top: true,
+            coverpage: true,
+
+            // Search configuration
+            search: {
+                placeholder: '🔍 Search topics...',
+                noData: 'No results found',
+                paths: 'auto',
+                depth: 3
+            },
+
+            // Copy code plugin config
+            copyCode: {
+                buttonText: 'Copy',
+                successText: 'Copied!'
+            },
+
+            // Pagination
+            pagination: {
+                previousText: '← Previous',
+                nextText: 'Next →'
+            },
+
+            // Tabs for code examples
+            tabs: {
+                persist: true,
+                sync: true
+            },
+
+            // Progress bar
+            progress: {
+                position: 'top',
+                color: '#58a6ff',
+                height: '3px'
+            },
+
+            // Format updated time
+            formatUpdated: '{YYYY}-{MM}-{DD}',
+
+            // Aliases for cleaner URLs
+            alias: {
+                '/.*/_sidebar.md': '/_sidebar.md'
+            }
+        }
+    </script>
+
+    <!-- Docsify Core -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+
+    <!-- Search Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+
+    <!-- Code Highlighting -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-typescript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-jsx.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-java.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-sql.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-markdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-diff.min.js"></script>
+
+    <!-- Copy Code Button -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2/dist/docsify-copy-code.min.js"></script>
+
+    <!-- Pagination -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify-pagination@2/dist/docsify-pagination.min.js"></script>
+
+    <!-- Progress Bar -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify-progress@1/dist/progress.min.js"></script>
+
+    <!-- Emoji Support -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/emoji.min.js"></script>
+
+    <!-- Zoom Images -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+
+    <!-- Custom Footer Plugin -->
+    <script>
+        function footer(hook, vm) {
+            hook.afterEach(function (html, next) {
+                var footer = `
+          <footer class="custom-footer">
+            <div class="footer-content">
+              <div class="footer-terminal">
+                <span class="terminal-prompt">$</span> 
+                <span class="terminal-text">echo "Made with 💚 for the dev community"</span>
+              </div>
+              <div class="footer-links">
+                <a href="https://nhussein.io" target="_blank" class="footer-author">
+                  <span class="author-badge">@nhussein</span>
+                </a>
+                <span class="footer-divider">•</span>
+                <a href="https://github.com/nhussein2026/interview-prep" target="_blank" class="footer-repo">
+                  <svg class="github-icon" viewBox="0 0 16 16" width="16" height="16">
+                    <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                  </svg>
+                  <span>Star on GitHub</span>
+                </a>
+                <span class="footer-divider">•</span>
+                <span class="open-source-badge">
+                  <span class="oss-icon">◆</span> Open Source
+                </span>
+              </div>
+              <div class="footer-contribution">
+                <code>git clone https://github.com/nhussein2026/interview-prep.git</code>
+                <span class="contribution-text">← Fork, contribute, make it better!</span>
+              </div>
+            </div>
+          </footer>
+        `;
+                html = html + footer;
+                next(html);
+            });
+        }
+        window.$docsify.plugins = [].concat(footer, window.$docsify.plugins || []);
+    </script>
+
+    <!-- Footer Styles -->
+    <style>
+        .custom-footer {
+            margin-top: 60px;
+            padding: 30px 0;
+            border-top: 1px solid #30363d;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-terminal {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .terminal-prompt {
+            color: #238636;
+            font-weight: bold;
+        }
+
+        .terminal-text {
+            color: #8b949e;
+        }
+
+        .footer-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .footer-divider {
+            color: #30363d;
+        }
+
+        .footer-author {
+            text-decoration: none !important;
+        }
+
+        .author-badge {
+            background: linear-gradient(135deg, #238636, #2ea043);
+            color: #fff !important;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .author-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(35, 134, 54, 0.4);
+        }
+
+        .footer-repo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #8b949e !important;
+            text-decoration: none !important;
+            padding: 6px 12px;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+
+        .footer-repo:hover {
+            color: #58a6ff !important;
+            border-color: #58a6ff;
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        .github-icon {
+            flex-shrink: 0;
+        }
+
+        .open-source-badge {
+            color: #f0883e;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .oss-icon {
+            font-size: 10px;
+        }
+
+        .footer-contribution {
+            background: #0d1117;
+            border: 1px dashed #30363d;
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-contribution code {
+            background: #21262d !important;
+            color: #79c0ff !important;
+            padding: 4px 8px !important;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: 'JetBrains Mono', monospace !important;
+        }
+
+        .contribution-text {
+            color: #8b949e;
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .footer-contribution {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .footer-links {
+                gap: 8px;
+            }
+        }
+    </style>
+</body>
+
+</html>
