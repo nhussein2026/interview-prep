@@ -241,9 +241,18 @@
     <div id="app">Loading...</div>
 
     <script>
+        // Detect base path for GitHub Pages
+        // If served from a subdirectory (project site), extract the base path
+        const pathParts = window.location.pathname.split('/').filter(p => p);
+        const isGitHubPages = window.location.hostname.includes('github.io');
+        const basePath = (isGitHubPages && pathParts.length > 0 && pathParts[0] !== 'index.html') 
+            ? '/' + pathParts[0] + '/' 
+            : '/';
+        
         window.$docsify = {
             name: '💻 Interview Prep Hub',
             repo: 'https://github.com/nhussein2026/interview-prep',
+            basePath: basePath,
             loadSidebar: true,
             subMaxLevel: 3,
             auto2top: true,
